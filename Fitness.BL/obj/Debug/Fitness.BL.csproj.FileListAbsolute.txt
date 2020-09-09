@@ -1,0 +1,5 @@
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.BL\bin\Debug\Fitness.BL.dll
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.BL\bin\Debug\Fitness.BL.pdb
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.BL\obj\Debug\Fitness.BL.csprojAssemblyReference.cache
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.BL\obj\Debug\Fitness.BL.dll
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.BL\obj\Debug\Fitness.BL.pdb

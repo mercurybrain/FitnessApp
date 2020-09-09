@@ -1,0 +1,9 @@
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.CMD\bin\Debug\Fitness.CMD.exe.config
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.CMD\bin\Debug\Fitness.CMD.exe
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.CMD\bin\Debug\Fitness.CMD.pdb
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.CMD\bin\Debug\Fitness.BL.dll
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.CMD\bin\Debug\Fitness.BL.pdb
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.CMD\obj\Debug\Fitness.CMD.csprojAssemblyReference.cache
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.CMD\obj\Debug\Fitness.CMD.csproj.CopyComplete
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.CMD\obj\Debug\Fitness.CMD.exe
+C:\Users\Пользователь\source\repos\FitnesSolution\Fitness.CMD\obj\Debug\Fitness.CMD.pdb
