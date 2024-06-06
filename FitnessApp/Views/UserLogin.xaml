@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp.Views.UserLogin"
+             xmlns:model="clr-namespace:FitnessApp.Models"
+             xmlns:controls="clr-namespace:FitnessApp.Controls"
+             Title="Войти">
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+
+        <controls:CircularProgressBar
+        x:Name="caloriesProgress"
+        Progress="40"
+        ProgressColor="Red"
+        ProgressLeftColor="Black"
+        Size="180"
+        TextColor="Black"
+        Thickness="4" />
+        <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto" HorizontalOptions="Center">
+            <Label FontSize="20" Grid.Column="0" Grid.Row="0">
+                <Label.Text>
+                    <MultiBinding StringFormat="Осталось калорий сегодня: {1} - {0} = {2}">
+                        <Binding Path="inTake" />
+                        <Binding Path="caloriesGoal" />
+                        <Binding Path="caloriesToTake" />
+                    </MultiBinding>
+                </Label.Text>
+
+            </Label>
+            <Image Source="calicon.png" Grid.Column="1" Grid.Row="0" WidthRequest="24" HeightRequest="24"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

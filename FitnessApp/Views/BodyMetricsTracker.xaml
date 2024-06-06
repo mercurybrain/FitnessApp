@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp.Views.BodyMetricsTracker"
+             Title="Физические показатели">
+    <StackLayout Padding="20">
+        <Label Text="Вес (кг):" />
+        <Entry x:Name="weightEntry" Keyboard="Numeric" />
+
+        <Label Text="Рост (см):" />
+        <Entry x:Name="heightEntry" Keyboard="Numeric" />
+
+        <Label Text="Возраст:" />
+        <Entry x:Name="ageEntry" Keyboard="Numeric" />
+
+        <Label Text="Пол:" />
+        <Picker x:Name="genderPicker">
+            <Picker.Items>
+                <x:String>Мужской</x:String>
+                <x:String>Женский</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <Label Text="Уровень активности:" />
+        <Picker x:Name="activityLevelPicker">
+            <Picker.Items>
+                <x:String>Минимальный (сидячий образ жизни)</x:String>
+                <x:String>Легкий (тренировки 1-3 раза в неделю)</x:String>
+                <x:String>Умеренный (тренировки 3-5 раз в неделю)</x:String>
+                <x:String>Высокий (тренировки 6-7 раз в неделю)</x:String>
+                <x:String>Очень высокий (тренировки каждый день плюс физическая работа)</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <Label Text="Целевой вес (кг):" />
+        <Entry x:Name="weightGoal" Keyboard="Numeric" />
+
+        <Button Text="Рассчитать BMR и TDEE" Clicked="CalculateClicked" />
+
+        <Frame BorderColor="Gray"
+                CornerRadius="10" Margin="10"  IsVisible="Hidden" x:Name="frameResult">
+            <VerticalStackLayout>
+                <Label Text="" x:Name="BMRLabel"/>
+                <Label Text="" x:Name="TDEELabel"/>
+                <Label Text="" x:Name="CaloriesGoalLabel"/>
+            </VerticalStackLayout>
+        </Frame>
+    </StackLayout>
+</ContentPage>

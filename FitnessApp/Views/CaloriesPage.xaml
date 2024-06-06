@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="FitnessApp.Views.CaloriesPage"
+             xmlns:model="clr-namespace:FitnessApp.Models"
+             xmlns:viewmodel="clr-namespace:FitnessApp.ViewModel"
+             x:DataType="viewmodel:FoodViewModel"
+             Title="{Binding Title}">
+    <Grid
+        ColumnDefinitions="*,*"
+        ColumnSpacing="5"
+        RowDefinitions="Auto,*,Auto"
+        RowSpacing="0">
+        <Label Text="Информация о пищевой ценности представлена на 100г продукта" Grid.ColumnSpan="2" Padding="10" FontSize="10"/>
+        <CollectionView ItemsSource="{Binding foodList}"
+                         SelectionMode="None"
+                         Grid.Row="1"
+                         Grid.ColumnSpan="2">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Calories">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="150">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:FoodViewModel}}, Path=AddFoodCommand}"
+                                CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            <Grid Padding="0" ColumnDefinitions="*,*">
+                                <Label WidthRequest="125" HeightRequest="125" Text="{Binding name}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" 
+                                       FontFamily="OpenSansBold"
+                                       FontSize="16" LineBreakMode="CharacterWrap"/>
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Padding="10">
+                                    <Label Text="{Binding Path=kcal, StringFormat='{0} ккал'}" FontSize="15" FontFamily="OpenSansBold"/>
+                                    <Label Text="{Binding Path=b, StringFormat='Белки: {0} г'}" FontFamily="OpenSansRegular"/>
+                                    <Label Text="{Binding Path=g, StringFormat='Жиры: {0} г'}" FontFamily="OpenSansRegular"/>
+                                    <Label Text="{Binding Path=u, StringFormat='Углеводы: {0} г'}" FontFamily="OpenSansRegular"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Text="Получить список еды" 
+                Command="{Binding GetFoodCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="2"
+                Grid.Column="0"
+                BackgroundColor="Transparent"
+                TextColor="Black"
+                BorderColor="{StaticResource Primary}"
+                BorderWidth="2"
+                Margin="8"/>
+        <SearchBar x:Name="searchBar"
+                   Grid.Row="2"
+                   Grid.Column="1"
+           SearchCommand="{Binding PerformSearchCommand}"
+           SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+        <ActivityIndicator IsVisible="True"
+                           IsRunning="{Binding IsBusy}"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Center"
+			               Color="{StaticResource Primary}"
+                           Grid.RowSpan="2"
+                           Grid.ColumnSpan="2"/>
+    </Grid> 
+</ContentPage>

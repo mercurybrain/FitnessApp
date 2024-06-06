@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp.Views.UserRegistration">
+    <VerticalStackLayout Spacing="15" Margin="50" VerticalOptions="Center">
+        <Label Text="Регистрация" FontSize="30" FontFamily="OpenSansBold" HorizontalOptions="Center"/>
+        <Grid ColumnDefinitions="Auto,*">
+            <Image Source="email.png" Grid.Column="0" WidthRequest="24" HeightRequest="24" Margin="5"/>
+            <Entry Placeholder = "E-Mail" FontFamily="OpenSansRegular" Grid.Column="1"
+                FontSize="18" MaxLength ="20" x:Name="email"/>
+        </Grid>
+        <Grid ColumnDefinitions="Auto,*">
+            <Image Source="person.png" Grid.Column="0" Grid.Row="1" WidthRequest="24" HeightRequest="24" Margin="5"/>
+            <Entry Placeholder = "Логин" FontFamily="OpenSansRegular" Grid.Column="1" Grid.Row="1"
+                FontSize="18" MaxLength ="20" x:Name="login"/>
+        </Grid>
+        <Grid ColumnDefinitions="Auto,*">
+            <Image Source="password.png" Grid.Column="0" Grid.Row="2" WidthRequest="24" HeightRequest="24" Margin="5"/>
+            <Entry Placeholder = "Пароль" FontFamily="OpenSansRegular" Grid.Column="1" Grid.Row="2"
+                FontSize="18" MaxLength ="20" IsPassword="True" x:Name="pass"/>
+        </Grid>
+        <Button Text="Зарегистрироваться" FontSize="18" WidthRequest="210" Clicked="Registration_Clicked"/>
+    </VerticalStackLayout>
+</ContentPage>

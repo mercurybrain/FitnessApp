@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FitnessApp.Views.Dashboard"
+             xmlns:model="clr-namespace:FitnessApp.Models"
+             xmlns:controls="clr-namespace:FitnessApp.Controls"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             xmlns:vms="clr-namespace:FitnessApp.ViewModel;assembly=FitnessApp"
+             NavigationPage.HasBackButton="false"
+             xmlns:viewmodel="clr-namespace:FitnessApp.ViewModel"
+             x:DataType="viewmodel:DashboardViewModel"
+             Title="{Binding Title}"
+             x:Name="MainPage">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsVisible="False" IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="usernameToolbar" Text="{Binding Username}"
+                    />
+        <ToolbarItem Text="Выйти" Clicked="ToolbarItem_Clicked"
+                   />
+    </ContentPage.ToolbarItems>
+    <StackLayout Padding="20" Spacing="15">
+        <controls:CircularProgressBar
+            x:Name="caloriesProgress"
+            Progress="{Binding CaloriesProgress}"
+            ProgressColor="Red"
+            ProgressLeftColor="Black"
+            Size="180"
+            TextColor="Black"
+            Thickness="15" HorizontalOptions="Center"/>
+        <Grid ColumnDefinitions="Auto,*" RowDefinitions="*,*" HorizontalOptions="Center">
+            <Label Text="Осталось калорий сегодня:" Grid.Column="0" Grid.Row="0" HorizontalTextAlignment="Center"/>
+            <HorizontalStackLayout Grid.Column="0" Grid.Row="1" HorizontalOptions="Center">
+                <Label FontSize="18" HorizontalTextAlignment="Center" Text="{Binding CaloriesGoal}" x:Name="caloriesGoalLabel"/>
+                <Label FontSize="18" HorizontalTextAlignment="Center" Text=" - "/>
+                <Label FontSize="18" HorizontalTextAlignment="Center" Text="{Binding InTake}" x:Name="caloriesInTakeLabel"/>
+                <Label FontSize="18" HorizontalTextAlignment="Center" Text=" = "/>
+                <Label FontSize="18" HorizontalTextAlignment="Center" Text="{Binding CaloriesToTake}" x:Name="caloriesToTakeLabel"/>
+                <Image Source="calicon.png" WidthRequest="24" HeightRequest="24"/>
+            </HorizontalStackLayout>
+        </Grid>
+        <Grid ColumnDefinitions="150, 150" RowDefinitions="145, 145" ColumnSpacing="15" HorizontalOptions="Center" RowSpacing="15">
+            <Frame BorderColor="Gray"
+                CornerRadius="10" Grid.Column="0">
+                <VerticalStackLayout VerticalOptions="Center">
+                    <Image Source="calories.png" WidthRequest="60" HeightRequest="60"/>
+                    <Button Text="Трекер калорий" FontSize="12" Padding="0" Margin="5" BackgroundColor="Transparent" TextColor="Black"
+                            Clicked="cals_Clicked"/>
+                </VerticalStackLayout>
+            </Frame>
+            <Frame BorderColor="Gray"
+                CornerRadius="10" Grid.Column="1">
+                <VerticalStackLayout VerticalOptions="Center">
+                    <Image Source="body_mass_index.png" WidthRequest="60" HeightRequest="60"/>
+                    <Button Text="Физические показатели" FontSize="12" Padding="0" Margin="5" BackgroundColor="Transparent" TextColor="Black" LineBreakMode="CharacterWrap"
+                            Clicked="bms_Clicked"/>
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+    </StackLayout>
+</ContentPage>
