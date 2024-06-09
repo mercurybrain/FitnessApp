@@ -19,6 +19,8 @@
         <Button Text="Войти" FontSize="18" WidthRequest="125" Clicked="Login_Clicked"/>
         <Line/>
         <Button Text="Регистрация" FontSize="16" WidthRequest="130" Clicked="Registration_Clicked"/>
+        <Line/>
+        <Button Text="!DROP!" FontSize="12" WidthRequest="130" Clicked="Drop_DB" x:Name="dropDBbtn" IsVisible="False"/>
     </VerticalStackLayout>
     
 

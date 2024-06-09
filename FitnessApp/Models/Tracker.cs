@@ -11,9 +11,9 @@ namespace FitnessApp.Models
         [ForeignKey(typeof(User))]
         public string Username { get; set; }
         public DateTime DateTrack { get; set; }
-        public double b { get; set; }
-        public double g { get; set; }
-        public double u { get; set; }
-        public int CaloriesInTake { get; set; }
+        public float b { get; set; }
+        public float g { get; set; }
+        public float u { get; set; }
+        public float CaloriesInTake { get; set; }
     }
 }

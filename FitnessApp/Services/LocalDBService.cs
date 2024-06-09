@@ -16,6 +16,12 @@ namespace FitnessApp.Services
             _connection.CreateTableAsync<Tracker>();
         }
 
+        public async Task DropAll() { 
+            await _connection.DropTableAsync<User>();
+            await _connection.DropTableAsync<BodyMetrics>();
+            await _connection.DropTableAsync<Tracker>();
+        }
+
         public async Task<List<User>> GetAllUsers()
         {
             return await _connection.Table<User>().ToListAsync();
@@ -58,8 +64,18 @@ namespace FitnessApp.Services
             await _connection.UpdateAsync(metrics);
         }
 
-        public async Task<Tracker> GetTracker(string username)
+        public async Task<List<Tracker>> GetHistory(string username, int N)
         {
+            var query = _connection.Table<Tracker>()
+                .Where(x => x.Username == username)
+                .OrderByDescending(x => x.DateTrack);
+
+            var trackers = await query.ToListAsync(); // Используем IQueryable
+
+            return trackers.TakeLast(N).ToList(); // Используем TakeLast
+        }
+
+        public async Task<Tracker> GetTracker(string username) {
             return await _connection.Table<Tracker>().Where(x => x.Username == username).FirstOrDefaultAsync();
         }
 

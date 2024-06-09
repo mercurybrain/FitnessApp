@@ -48,4 +48,14 @@ public partial class Dashboard : ContentPage
     {
         await Navigation.PushAsync(new CaloriesPage(new ViewModel.FoodViewModel(new JsonCalories(), _username)));
     }
+
+    private async void calsHistory_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CalsHistoryPage(new ViewModel.CalsHistoryVM(_username)));
+    }
+
+    private void exerciseClicked(object sender, EventArgs e)
+    {
+        //await Navigation.PushAsync(new CalsHistroyPage);
+    }
 }

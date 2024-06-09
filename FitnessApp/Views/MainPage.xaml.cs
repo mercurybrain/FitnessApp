@@ -15,6 +15,14 @@ namespace FitnessApp
             InitializeComponent();
         }
 
+        protected override async void OnAppearing()
+        {
+#if DEBUG
+            dropDBbtn.IsVisible = true;
+#endif
+            base.OnAppearing();
+        }
+
         private async void Login_Clicked(object sender, EventArgs e)
         {
             pass.IsEnabled = false;
@@ -44,6 +52,12 @@ namespace FitnessApp
             pass.IsEnabled = false;
             pass.IsEnabled = true;
             await Navigation.PushAsync(new UserRegistration(_dbService), true);
+        }
+
+        private async void Drop_DB(object sender, EventArgs e) {
+            await _dbService.DropAll();
+            await Shell.Current.DisplayAlert("Сброс БД", "База сброшена, перезапустите приложение", "OK");
+            Application.Current.Quit();
         }
     }
 

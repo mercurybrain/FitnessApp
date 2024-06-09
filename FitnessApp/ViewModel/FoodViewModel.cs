@@ -2,9 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FitnessApp.Services;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.Input;
@@ -75,35 +72,48 @@ namespace FitnessApp.ViewModel
         async Task AddFood(Calories food) {
             if (food == null) return;
 
-            double gr = double.Parse(await Shell.Current.DisplayPromptAsync(food.name, "Грамм: ", initialValue: "100", keyboard: Keyboard.Numeric));
+            float gr = float.Parse(await Shell.Current.DisplayPromptAsync(food.name, "Грамм: ", initialValue: "100", keyboard: Keyboard.Numeric), CultureInfo.InvariantCulture);
 
             try
             {
                 IsBusy = true;
 
-                double proteins = double.Parse(food.b, NumberStyles.Any, CultureInfo.InvariantCulture) * gr / 100;
-                double fats = double.Parse(food.g, NumberStyles.Any, CultureInfo.InvariantCulture) * gr / 100;
-                double carbohydrates = double.Parse(food.u, NumberStyles.Any, CultureInfo.InvariantCulture) * gr / 100;
-                int kcal = int.Parse(food.kcal) * (int)gr / 100;
+                float proteins = float.Parse(food.b, CultureInfo.InvariantCulture) * gr / 100;
+                float fats = float.Parse(food.g, CultureInfo.InvariantCulture) * gr / 100;
+                float carbohydrates = float.Parse(food.u, CultureInfo.InvariantCulture) * gr / 100;
+                float kcal = float.Parse(food.kcal, CultureInfo.InvariantCulture) * gr / 100;
 
                 var maybe = await _dbService.GetTracker(_username);
-                if (maybe != null)
+                if (maybe is not null && maybe.DateTrack == DateTime.Now.Date)
                 {
                     proteins += maybe.b;
                     fats += maybe.g;
                     carbohydrates += maybe.u;
                     kcal += maybe.CaloriesInTake;
-                }
 
-                await _dbService.InsertTrack(new Tracker()
-                {
-                    b = proteins,
-                    g = fats,
-                    u = carbohydrates,
-                    CaloriesInTake = kcal,
-                    DateTrack = DateTime.Now.Date,
-                    Username = _username
-                });
+
+                    await _dbService.UpdateTracker(new Tracker()
+                    {
+                        Id = maybe.Id,
+                        b = (float)Math.Round(proteins, 2),
+                        g = (float)Math.Round(fats, 2),
+                        u = (float)Math.Round(carbohydrates, 2),
+                        CaloriesInTake = (float)Math.Round(kcal, 2),
+                        DateTrack = DateTime.Now.Date,
+                        Username = _username
+                    });
+                }
+                else {
+                    await _dbService.InsertTrack(new Tracker()
+                    {
+                        b = (float)Math.Round(proteins, 2),
+                        g = (float)Math.Round(fats, 2),
+                        u = (float)Math.Round(carbohydrates, 2),
+                        CaloriesInTake = (float)Math.Round(kcal, 2),
+                        DateTrack = DateTime.Now.Date,
+                        Username = _username
+                    });
+                }
             }
             catch (Exception ex)
             {

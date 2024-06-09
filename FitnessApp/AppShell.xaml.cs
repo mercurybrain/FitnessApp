@@ -10,6 +10,7 @@ namespace FitnessApp
 
             Routing.RegisterRoute(nameof(BodyMetricsTracker), typeof(BodyMetricsTracker));
             Routing.RegisterRoute(nameof(CaloriesPage), typeof(CaloriesPage));
+            Routing.RegisterRoute(nameof(CalsHistoryPage), typeof(CalsHistoryPage));
         }
     }
 }

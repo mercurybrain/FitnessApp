@@ -9,6 +9,7 @@ using LiveChartsCore.SkiaSharpView.Painting;
 using SkiaSharp;
 using LiveChartsCore.Defaults;
 using LiveChartsCore.SkiaSharpView;
+using CommunityToolkit.Mvvm.Input;
 
 namespace FitnessApp.ViewModel
 {
@@ -44,7 +45,7 @@ namespace FitnessApp.ViewModel
 
             var result = GetFoodAsync();
         }
-        async Task GetFoodAsync()
+        public async Task GetFoodAsync()
         {
             if (IsBusy)
                 return;
@@ -58,15 +59,22 @@ namespace FitnessApp.ViewModel
                 else
                     CaloriesGoal = user.CaloriesGoal;
                 Tracker tracker = await _dbService.GetTracker(Username);
-                InTake = 0;
                 
-                if (tracker is not null && tracker.DateTrack == DateTime.Now.Date) {
-                    InTake = tracker.CaloriesInTake;
-                    Proteins = tracker.b; Fats = tracker.g; Carbohydrates = tracker.u;
+
+                if (tracker is not null && tracker.DateTrack == DateTime.Now.Date)
+                {
+                    InTake = (int)tracker.CaloriesInTake;
+                    Proteins = Math.Round(tracker.b, 2); Fats = Math.Round(tracker.g, 2); Carbohydrates = Math.Round(tracker.u, 2);
+
+                    CaloriesProgress = 100 * ((double)InTake / (double)CaloriesGoal);
+                }
+                else {
+                    InTake = 0;
+                    Proteins = Fats = Carbohydrates = 0;
+                    CaloriesProgress = 0;
                 }
 
                 CaloriesToTake = CaloriesGoal - InTake;
-                CaloriesProgress = 100 / (CaloriesGoal / InTake);
             }
             catch (Exception ex)
             {
@@ -76,6 +84,18 @@ namespace FitnessApp.ViewModel
             finally
             {
                 IsBusy = false;
+            }
+        }
+        [RelayCommand]
+        async Task Appearing()
+        {
+            try
+            {
+                await GetFoodAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
             }
         }
     }
