@@ -11,7 +11,7 @@ public partial class PopupMetrics : Popup
     string _username;
 	public PopupMetrics(string username)
 	{
-		InitializeComponent();
+        InitializeComponent();
         _username = username;
 	}
 

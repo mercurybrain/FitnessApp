@@ -22,7 +22,7 @@
         </Picker>
 
         <Label Text="Уровень активности:" />
-        <Picker x:Name="activityLevelPicker">
+        <Picker x:Name="activityLevelPicker" >
             <Picker.Items>
                 <x:String>Минимальный (сидячий образ жизни)</x:String>
                 <x:String>Легкий (тренировки 1-3 раза в неделю)</x:String>

@@ -89,14 +89,7 @@ namespace FitnessApp.ViewModel
         [RelayCommand]
         async Task Appearing()
         {
-            try
-            {
-                await GetFoodAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.ToString());
-            }
+            await GetFoodAsync();
         }
     }
 }

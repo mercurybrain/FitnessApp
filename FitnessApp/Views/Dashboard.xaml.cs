@@ -46,16 +46,16 @@ public partial class Dashboard : ContentPage
     }
     private async void cals_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new CaloriesPage(new ViewModel.FoodViewModel(new JsonCalories(), _username)));
+        await Navigation.PushAsync(new CaloriesPage(new FoodViewModel(new JsonCalories(), _username)));
     }
 
     private async void calsHistory_Clicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new CalsHistoryPage(new ViewModel.CalsHistoryVM(_username)));
+        await Navigation.PushAsync(new CalsHistoryPage(new CalsHistoryVM(_username)));
     }
 
-    private void exerciseClicked(object sender, EventArgs e)
+    private async void exerciseClicked(object sender, EventArgs e)
     {
-        //await Navigation.PushAsync(new CalsHistroyPage);
+        await Navigation.PushAsync(new Exercises(new ExerciseVM(_username)));
     }
 }
